@@ -46,11 +46,24 @@ and open the template in the editor.
         <div class="container">
             <div class="header">
                 <ul class="nav nav-pills pull-right">
-                    <li class="active"><a href="#">Início</a></li>
-                    <li><a href="#">Sobre</a></li>
+                    <?php
+                    //definindo as urls do index
+                    $url_home  = $this->url('home');
+                    $url_sobre = $this->url('sobre');
+                    ?>
+<!--                    <li class="active"><a href="#">Início</a></li>-->
+                    <li <?php echo $this->menuAtivo($url_home); ?>>
+                        <a href="<?php echo $url_home; ?>">Início</a>
+                    </li>
+<!--                    <li><a href="#">Sobre</a></li>-->
+                    <li <?php echo $this->menuAtivo($url_sobre);?>>
+                        <a href="<?php echo $url_sobre; ?>">Sobre</a>
+                    </li>
                 </ul>
                 <h3 class="text-muted"><?php echo $NAME_APPLICATION; ?></h3>
             </div>
+            
+            <?php echo $this->mensagem(); ?>
             <br>
             <div class="row marketing">
                 <?php echo $this->content;  ?>
@@ -65,11 +78,13 @@ and open the template in the editor.
         <!--Scripts-->
         <?php
             echo $this
-                ->headScript()
-                ->prependFile($this->basePath() . '/js/bootstrap.min.js')
-                ->prependFile($this->basePath() . '/js/jquery.min.js')
+                ->headScript()                
                 ->prependFile($this->basePath() . '/js/repond.min.js', 'text/javascript', array('conditional' => 'lt IE 9',))
                 ->prependFile($this->basePath() . '/js/html5shiv.js', 'text/javascript', array('conditional' => 'lt IE 9',))
+                ->prependFile($this->basePath() . '/js/scripts.js')
+                ->prependFile($this->basePath() . '/js/jquery.min.js')
+                ->prependFile($this->basePath() . '/js/bootstrap.min.js')
+                
             ;
             
             echo $this->inlineScript();

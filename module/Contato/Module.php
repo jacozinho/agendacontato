@@ -28,4 +28,22 @@ class Module
             ),
         );
     }
+    
+    /**
+    *Registro da View Helper
+     * 
+     */
+    public function getViewHelperConfig(){
+        return array(
+            #registro da View Helper com injecao de dependencia
+            'factories' => array(
+                'menuAtivo' => function($sm){
+                    return new View\Helper\MenuAtivo($sm->getServiceLocator()->get('Request'));
+                },
+                'mensagem' => function($sm) {
+                    return new View\Helper\Mensagem($sm->getServiceLocator()->get('ControllerPluginManager')->get('flashmessenger'));
+                },
+            )
+        );
+    }
 }
