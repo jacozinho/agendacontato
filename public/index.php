@@ -1,4 +1,8 @@
 <?php
+
+define('REQUEST_MICROTIME', microtime(true)); //se precisar, (des)comentar esta linha.
+
+
 /**
  * This makes our life easier when dealing with paths. Everything is relative
  * to the application root now.
