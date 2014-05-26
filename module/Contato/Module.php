@@ -51,6 +51,9 @@ class Module
                 'mensagem' => function($sm) {
                     return new View\Helper\Mensagem($sm->getServiceLocator()->get('ControllerPluginManager')->get('flashmessenger'));
                 },
+            ),
+            'invokables' => array(
+                'filter' => 'Contato\View\Helper\ContatoFilter'
             )
         );
     }

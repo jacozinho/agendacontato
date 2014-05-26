@@ -53,4 +53,64 @@ class ContatoTable{
             throw new Exception ("Nao foi encontado o contato de id = {$id}");            
         return $row;
     }
+    
+    /**
+    * Atualizar um contato existente
+    *
+    * @param \Contato\Model\Contato $contato
+    * @throws \Exception
+    */
+    public function update(Contato $contato)
+    {
+//        $timeNow = new \DateTime();
+        $timeNow = date('Y-m-d H:i:s');        
+
+        $data = [
+            'nome'                  => $contato->nome,
+            'telefone_principal'    => $contato->telefone_principal,
+            'telefone_secundario'   => $contato->telefone_secundario,
+            'data_atualizacao'      => $timeNow,
+        ];
+
+        $id = (int) $contato->id;
+        if ($this->find($id)) {
+            $this->tableGateway->update($data, array('id' => $id));
+        } else {
+            throw new \Exception("Contato #{$id} inexistente");
+        }
+    }
+    
+    
+    
+    /**
+    * Inserir um novo contato
+    *
+    * @param \Contato\Model\Contato $contato
+    * @return 1/0
+    */
+    public function save(Contato $contato)
+    {
+        $timeNow = date('Y-m-d H:i:s');
+        $timeNow1 = date('Y-m-d H:i:s');
+
+        $data = [
+            'nome'                  => $contato->nome,
+            'telefone_principal'    => $contato->telefone_principal,
+            'telefone_secundario'   => $contato->telefone_secundario,
+            'data_criacao'          => $timeNow,
+            'data_atualizacao'      => $timeNow1, # data de criação igual a de atualização
+        ];
+
+        return $this->tableGateway->insert($data);
+    }
+    
+    /**
+     * Deletar um contato existente
+     * @param type $id
+     * 
+     */
+    public function delete($id){
+        $this->tableGateway->delete(array('id'=>(int) $id));
+    }
+    
 }

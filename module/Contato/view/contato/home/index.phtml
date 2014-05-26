@@ -54,7 +54,11 @@ and open the template in the editor.
                     <td>(099)81287024</td>
                     <td class="text-center">2</td>
                     <!--<td><?php // echo $this->dateFormat(new DateTime(), IntlDateFormatter::SHORT); ?></td>-->
-                    <td><?php echo date('Y-m-d H:i:s'); ?></td>
+                    
+                    <td><?php 
+                        $date = new DateTime('now', new DateTimeZone('America/Sao_Paulo'));
+                        $date = $date->format('d/m/Y - H:i');
+                        echo  $date; ?></td>
                     <td>
                         <a class="btn btn-xs btn-info" title="Visualizar" href=""><span class="glyphicon glyphicon-new-window"></span></a>
                         <a class="btn btn-xs btn-warning" title="Editar" href=""><span class="glyphicon glyphicon-edit"></span></a>
